@@ -51,7 +51,11 @@ Either send us a link to the repository on somewhere like github or bitbucket (b
 
 1. go to `$ cd /api` directory
 2. run `$ composer install` - install dependencies
-3. run `php bin/console server:run *:9090
-`
+3. run `php bin/console server:run *:9090`
+
+
+### FE Dev
+
+1. run `yarn watch` or `npm run watch` listen port `8090`
 
 

@@ -1,5 +1,5 @@
 make_shorten_url:
-    path: /create
+    path: /api/create
     controller: App\Controller\URLShortnerController::makeUrlShorten
     methods:  [POST]
 get_localization_of_shorten_url:
