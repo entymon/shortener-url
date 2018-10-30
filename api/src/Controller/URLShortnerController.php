@@ -37,7 +37,7 @@ class URLShortnerController extends AbstractController implements URLShortnerCon
 				return $response;
 			} else {
 				$responseData = [
-					'error' => 'Request is not valid. Parameter `url` required',
+					'error' => 'Parameter "URL" is required',
 				];
 				$response->setContent(json_encode($responseData));
 				$response->setStatusCode(Response::HTTP_BAD_REQUEST);

@@ -5,7 +5,8 @@ class CreateShortenUrl extends Component {
 	
 	state = {
 		originUrl: '',
-		shortenUrl: ''
+		shortenUrl: '',
+		apiError: false
 	};
 	
 	_originUrlHandler = (event) => {
@@ -17,7 +18,13 @@ class CreateShortenUrl extends Component {
 	_submitHandler = (event) => {
 		ApiService.getShortenUrl(this.state.originUrl, (res) => {
 			this.setState({
+				apiError: false,
 				shortenUrl: res.data.shorten_url
+			})
+		}, (error) => {
+			this.setState({
+				apiError: error,
+				shortenUrl: ''
 			})
 		});
 		event.preventDefault();
@@ -33,6 +40,13 @@ class CreateShortenUrl extends Component {
 							<div className="alert alert-success" role="alert">
 								<p>Shorten address:</p>
 								<h3>{this.state.shortenUrl}</h3>
+							</div>
+					)}
+					
+					{(this.state.apiError) && (
+							<div className="alert alert-danger" role="alert">
+								<p>Error:</p>
+								<h3>{this.state.apiError.message}</h3>
 							</div>
 					)}
 					

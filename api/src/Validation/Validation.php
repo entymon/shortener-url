@@ -18,9 +18,13 @@ class Validation implements ValidationInterface
 	 */
 	public function checkRequestValid($requestedData)
 	{
-		if (isset($requestedData['url'])) {
-			return true;
+		if (!isset($requestedData['url'])) {
+			return false;
 		}
-		return false;
+		if ($requestedData['url'] === '') {
+			return false;
+		}
+
+		return true;
 	}
 }
