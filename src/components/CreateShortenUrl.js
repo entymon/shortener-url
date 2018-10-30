@@ -1,10 +1,11 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
 import ApiService from '../services/ApiService';
 
 class CreateShortenUrl extends Component {
 	
 	state = {
-		originUrl: ''
+		originUrl: '',
+		shortenUrl: ''
 	};
 	
 	_originUrlHandler = (event) => {
@@ -14,7 +15,11 @@ class CreateShortenUrl extends Component {
 	};
 	
 	_submitHandler = (event) => {
-		ApiService.getShortenUrl();
+		ApiService.getShortenUrl(this.state.originUrl, (res) => {
+			this.setState({
+				shortenUrl: res.data.shorten_url
+			})
+		});
 		event.preventDefault();
 	};
 	
@@ -23,12 +28,21 @@ class CreateShortenUrl extends Component {
 			<div className="form-container">
 				<div>
 					<h1>Create Shorten URL</h1>
+					
+					{(this.state.shortenUrl !== '') && (
+							<div className="alert alert-success" role="alert">
+								<p>Shorten address:</p>
+								<h3>{this.state.shortenUrl}</h3>
+							</div>
+					)}
+					
 					<form onSubmit={this._submitHandler}>
 						<div className="form-group">
 							<label htmlFor="urlAddress">Your origin URL</label>
 							<input type="text" className="form-control" id="urlAddress" aria-describedby="urlHelp"
-							       placeholder="Enter URL to get shorten URL" value={this.state.originUrl} onChange={this._originUrlHandler}/>
-								<small id="urlHelp" className="form-text text-muted">For example: "http://www.payasugym.com".</small>
+							       placeholder="Enter URL to get shorten URL" value={this.state.originUrl}
+							       onChange={this._originUrlHandler}/>
+							<small id="urlHelp" className="form-text text-muted">For example: "http://www.payasugym.com".</small>
 						</div>
 						<button type="submit" className="btn btn-primary">Submit</button>
 					</form>

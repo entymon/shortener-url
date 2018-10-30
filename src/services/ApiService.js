@@ -10,9 +10,7 @@ export default class ApiService {
 		})
 			.then(successCallback)
 			.catch((error) => {
-				
 				console.log(error);
-				
 			});
 	}
 }
