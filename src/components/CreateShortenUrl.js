@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ApiService from '../services/ApiService';
+import AppService from '../services/AppService';
 
 class CreateShortenUrl extends Component {
 	
 	state = {
 		originUrl: '',
 		shortenUrl: '',
-		apiError: false
+		errorMessage: false
 	};
 	
 	_originUrlHandler = (event) => {
@@ -16,18 +17,31 @@ class CreateShortenUrl extends Component {
 	};
 	
 	_submitHandler = (event) => {
-		ApiService.getShortenUrl(this.state.originUrl, (res) => {
+		event.preventDefault();
+		
+		AppService.requestValidation(this.state.originUrl).then(() => {
+			
+			ApiService.getShortenUrl(this.state.originUrl, (res) => {
+				this.setState({
+					errorMessage: false,
+					shortenUrl: res.data.shorten_url
+				})
+			}, (error) => {
+				this.setState({
+					errorMessage: error,
+					shortenUrl: ''
+				})
+			});
+			
+		}).catch((message) => {
+			
+			console.log(message);
 			this.setState({
-				apiError: false,
-				shortenUrl: res.data.shorten_url
-			})
-		}, (error) => {
-			this.setState({
-				apiError: error,
+				errorMessage: message,
 				shortenUrl: ''
 			})
 		});
-		event.preventDefault();
+		
 	};
 	
 	render() {
@@ -43,10 +57,10 @@ class CreateShortenUrl extends Component {
 							</div>
 					)}
 					
-					{(this.state.apiError) && (
+					{(this.state.errorMessage) && (
 							<div className="alert alert-danger" role="alert">
 								<p>Error:</p>
-								<h3>{this.state.apiError.message}</h3>
+								<h3>{this.state.errorMessage}</h3>
 							</div>
 					)}
 					

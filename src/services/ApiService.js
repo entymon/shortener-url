@@ -10,10 +10,7 @@ export default class ApiService {
 		})
 			.then(successCallback)
 			.catch((error) => {
-				errorCallback({
-					message: error.response.data.error,
-					status: error.response.status
-				});
+				errorCallback(error.response.data.error);
 			});
 	}
 }
