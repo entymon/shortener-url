@@ -47,3 +47,11 @@ Please clone this repository, write your code and update this README with a guid
 Either send us a link to the repository on somewhere like github or bitbucket (bitbucket has free private repositories).
 
 
+### API Dev
+
+1. go to `$ cd /api` directory
+2. run `$ composer install` - install dependencies
+3. run `php bin/console server:run *:9090
+`
+
+
