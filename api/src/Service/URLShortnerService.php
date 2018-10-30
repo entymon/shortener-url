@@ -18,13 +18,18 @@ class URLShortnerService implements URLShortnerServiceInterface
 	const SHORTEN_URL_INDEX = 2;
 
 	/**
+	 * @param int $httpPort
 	 * @param $url
 	 * @return string
 	 */
-	public function getShortenName($url)
+	public function getShortenName($url, $httpPort = '')
 	{
 		$shortenName = substr( str_shuffle("ASDFGHJKLZXCVBNMQWERTYUIOP0123456789asdfghjklzxcvbnmqwertyuiop"), 0, 6 );
-		$shortenUrl = 'http://localhost:9090/' . $shortenName;
+		$port = '';
+		if ($httpPort !== '') {
+			$port = ':' . $httpPort;
+		}
+		$shortenUrl = 'http://localhost'. $port .'/' . $shortenName;
 
 		$file = fopen(__DIR__ . '/../Data/file.csv', 'w');
 		$data = [

@@ -22,12 +22,14 @@ class URLShortnerController extends AbstractController implements URLShortnerCon
 			$data = json_decode($request->getContent(), true);
 			$validator = new Validation();
 
+			$port = $request->getPort();
+
 			$response = new Response();
 			$response->headers->set('Content-Type', 'application/json');
 			$response->headers->set('Access-Control-Allow-Origin', '*');
 
 			if ($validator->checkRequestValid($data)) {
-				$shortenUrl = $service->getShortenName($data[self::URL_DATA]);
+				$shortenUrl = $service->getShortenName($data[self::URL_DATA], $port);
 				$responseData = [
 					'shorten_url' => $shortenUrl,
 					'url' => $data[self::URL_DATA]

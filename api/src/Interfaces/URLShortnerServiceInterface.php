@@ -8,10 +8,9 @@
 
 namespace App\Interfaces;
 
-
 interface URLShortnerServiceInterface
 {
-	public function getShortenName($url);
+	public function getShortenName($url, $httpPort = '');
 	public function getOriginUrl($shortenName);
 
 }
