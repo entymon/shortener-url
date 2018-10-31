@@ -35,7 +35,6 @@ class CreateShortenUrl extends Component {
 			
 		}).catch((message) => {
 			
-			console.log(message);
 			this.setState({
 				errorMessage: message,
 				shortenUrl: ''

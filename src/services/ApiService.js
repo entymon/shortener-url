@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-export const API_PATH = 'http://localhost:9090';
+import { API_PATH } from '../config';
 
 export default class ApiService {
 	

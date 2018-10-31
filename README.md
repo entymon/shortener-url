@@ -59,6 +59,8 @@ Either send us a link to the repository on somewhere like github or bitbucket (b
 
 1. On root directory
 2. run `$ yarn` or `npm install`
-2. run `$ yarn watch` or `$ npm run watch` listen port `8090`
+3. run `$ yarn watch` or `$ npm run watch` listen port `8090`
 
-
+## UPDATE
+API dev environment can be run on any other port or even without
+It's very important to change `path/to/project/src/config.js` constant `API_PORT`
